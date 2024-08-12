@@ -1,0 +1,197 @@
+Enhanced For loop
+
+		-- way of iterating through the elements in arrays and collections in java.
+
+for(Type var_name : collectionName)
+{
+
+	//Body of loop
+}
+
+int numbers[]={10,20,30,40,50};
+
+for( int n : numbers)
+{
+	System.out.println(n);
+}
+
+Types of interfaces::
+
+	1. Marker  - tag interfaces. 
+			-- they are the interfaces without any methods declared. they are just going
+			to act like markers so that any class that implements this marker interface
+			will have certain qualities.
+			-- Serializable, Cloneable.
+	2. Functional --> It will only one abstract method but it can have default and static methods..
+			-- Predicate, Consumer, Supplier are examples of functional interfaces
+	3. Normal
+
+
+MAVEN
+
+
+pom.xml  contains the information related to the project and configuration information such as
+	DEPENDENCIES. PLUGINS, GOALS, ETC... USED BY Maven to build the project.
+
+	Maven read the POM.XML file to accomplish configuration and operations.
+
+
+
+Maven: 	Apache software 	
+
+	powerful build automation tool that is primarily for Java- based projects.
+	-> It describes how software is built
+	-> It describes the dependencies
+
+	** Convention over configurayion **
+
+	Maven central repository
+		stores them in in a local cache.
+	
+
+Objectives of Maven:
+	1. Making build process easy.
+	2. Providing quality project information.
+	3. Guiding some best practices for development.
+	4. Transparent migration to new features.
+	5. Gives uniform build system
+
+
+Maven life cycle:
+
+		Three built in life cycle
+			- default
+				- main life cycle of Maven as it is responsible for project deployment
+			- clean
+				- is used to clean the project and remove all files generation by the previous
+				build.
+			- site
+				- to create the project site documentation..
+
+Phases in build life cycle:
+
+Validate:  it will all the information which is necessary is available
+
+compile:  it will compiles the source code
+
+test-compile  -- this compiles the test source code
+
+test   it will run the unit test
+
+package -- this packages the source code into distributable format [ jar, war ]
+
+integration-test - it will process and deploys the package if needed to run integration test
+
+install - installs the package to a local repository
+
+deploy - copy the package to a remote repository
+
+verify - run any checks to verify the package is valid..
+
+
+mvn clean
+
+
+Logback:
+
+	--> logging library used for Java based applications
+	--> logback uses SLF4J as logging facade..
+
+SLF4J - Simple Logging Facade
+		-->It allows us to decouple the code that is used to create log events from
+the implementation that will be reponsible for processing and storing them in a way we want.
+
+TRACE – the lowest level of information, mostly used for very deep code debugging, usually not included in production logs.
+DEBUG – low level of information used for debugging purposes, usually not included in production logs.
+INFO – a log severity carrying information, like an operation that started or finished.
+WARN – a log level informing about an event that may require our attention, but is not critical and may be expected.
+ERROR – a log level telling that an error, expected or unexpected, usually meaning that part of the system is not working properly.
+
+
+Logback 
+
+ConsoleAppender
+OutStreamAppender
+FileAppender
+RollingFileAppender
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
