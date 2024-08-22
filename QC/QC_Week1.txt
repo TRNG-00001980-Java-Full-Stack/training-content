@@ -1,0 +1,157 @@
+********Git**********
+
+Git vs Github?
+What is a branch in Git? How do you create a new branch in Git? 
+Staging area in Git?
+gitignore
+workflow of git?
+git pull vs git fetch?
+How to create and delete a branch?
+What is merging?
+Why we need merging?
+git add, git commit, gitpush and git pull?
+how to get the previous commit in git?
+What is version control system?
+
+
+
+*******SDLC*********
+
+
+What is product catalog?
+Story pointing?
+Scrum ceremonies?
+What is a scrum? what is the role of scrum master? 
+Waterfall vs Agile?
+# SDLC
+
+* What are the steps in the software development lifecycle?
+    1. Planning / Requirements gathering
+    2. Analysis
+    3. Design
+    4. Development
+    5. Testing
+    6. Deployment
+    7. Maintenance
+* What is the difference between Waterfall and Agile methodologies? Explain the benefits and drawbacks of each
+    * Waterfall: linear, one-way, unable to make changes; best for projects with fixed, rigid requirements or highly regulated
+    * Agile: iterative approach, customer collaboration, responding to change; best for projects in dynamic environments where adaptation required
+* List some of the principles declared in the Agile manifesto
+    * Our highest priority is to satisfy the customer through early and continuous delivery of valuable software
+    * Welcome changing requirements
+    * Preference for shorter timescale for releases
+    * Business people & developers work together
+    * Value face to face conversation for communication
+    * Working software is the primary measure of progress
+    * Sustainable development - should be able to maintain constant pace
+    * Continuous attention to technical excellence and good design enhances agility.
+    * Simplicity – the art of maximizing the amount of work not done – is essential.
+    * The best architectures, requirements, and designs emerge from self-organizing teams.
+    * At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
+* What specific Agile frameworks exist? What are the main features of each?
+    * XP (Extreme programming) - paired programming, code reviews
+    * Scrum - sprints, daily standups, story pointing
+    * Kanban - kanban board
+* What is the Scrum process? Explain each of the Scrum ceremonies
+    * Sprint planning meeting
+    * Daily scrum (standups)
+    * Sprint review
+    * Sprint retrospective
+* How long is a typical sprint?
+    * 2-4 weeks
+* What is a "standup" and what should you report about your work?
+    * Short, ~15 min total; update on the status of everyone's work
+    * What you worked on yesterday, what you plan to work on today, and any blockers you have
+* What is the role of a "Scrum master" in a project? What about the "Product owner"?
+    * Scrum master is like the cheerleader / advocate for the team; they make sure nothing is in the team's way
+    * Product owner sets the vision for the product, helps with generating requirements / user stories and prioritizing
+* Explain the following metrics/charts: sprint velocity, burndown chart
+    * Velocity - average story points completed per sprint
+    * Burndown chart - showing reduction in outstanding story points over the sprint
+* What is a Scrum board? Have you used any software tools for your team's Scrum board?
+    * Board that has multiple columns as categories for the state of user stories
+    * Backlog, Todo, In Progress, Done are typical categories
+* What is the "Definition of Done"?
+    * The requirements the team agrees have to be met for a user story to be considered "done"
+    * Example: all unit tests pass, code is reviewed and merged in feature branch, non-functional requirements met
+* Name some technologies teams can use to keep track of progress on different projects, tasks, and due dates.
+    * JIRA, Github projects, Trello, Asana
+
+
+*****Java*****
+
+JDK, JRE, JVM
+Java wrapper class
+Type casting?
+Access modifiers?
+Final and finally?
+Encapsulation?Inheritance?Polymorphism?Abstraction? 
+Method overloading and overriding?
+super and this keyword?
+abstract class vs interface? 
+- What is Java?
+ - Pillars of OOP
+ - Define Abstraction
+ - Define Polymorphism
+ - Define Inheritance
+ - Define Encapsulation
+ - In what way does Java employ abstraction?
+ - In what way does Java employ polymorphism?
+ - In what way does Java employ inheritance?
+ - In what way does Java employ encapsulation?
+ - Describe the JDK, JRE, and the JVM
+ - List the Java primitive types
+ - What are wrapper classes?
+ - What is autoboxing and unboxing?
+ - What does the "final" keyword mean?
+ - What does the "static" keyword mean?
+ - What are variable arguments?
+ - What are the scopes in which a variable can exist in - in Java?
+ - What is the difference between an object and a class?
+ - What is the "new" keyword used for?
+ - What is the "super" keyword used for?
+ - What is the "this" keyword used for?
+ - What is a constructor?
+ - What is the difference between the == operator and .equals() method?
+ - What is the Object class's function in the Java language?
+ - What is a POJO?
+ - What is method overloading?
+ - What is method overriding?
+ - What is type casting?
+ - What are access modifiers?
+ - List the access modifiers from most visible to least visible
+ - What is the difference in visibility between protected and package-private access level?
+ - What are some non-access modifying keywords used in Java?
+ - What is the difference between an interface and an abstract class?
+ - What is the purpose of the .finalize() method?
+ - Is multiple inheritance supported in Java?
+ - Can garbage collected be forced in Java?
+ - What are packages used for?
+ - What are imports?
+ - What is the main method signature?
+ - What property of a Java primitive array tells us the size of the array?
+ - What are some constructs used in Java for flow control?
+ - What is the difference between a while and a do-while loop?
+ - What is the difference between a for loop and an enhanced for loop?
+ - What is the difference between an exception and an error in Java?
+ - What is the difference between a checked and an unchecked exception?
+ - How can exceptions be handled in Java?
+ - What is the purpose of the finally block?
+ - Are you required to handle RuntimeExceptions?
+ - Can exceptions be caught by multiple catch blocks in any order?
+
+Use of Maven?POM.xml?
+Exception handling?
+How to create custom exception?
+Throw, throws and throwable?
+StringBuilder and StringBuffer?
+Stack vs Heap
+ Describe the characteristics of the object-oriented paradigm
+ - Pillars of OOP
+ - Define Abstraction and provide advantages to using it
+ - Define Polymorphism and provide advantages to using it
+ - Define Inheritance and provide advantages to using it
+ - Define Encapsulation and provide advantages to using it
+ - What are some different types of polymorphism?
+Static keyword and final keyword?
+Checked and Uncheked Exceptions?

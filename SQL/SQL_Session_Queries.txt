@@ -1,0 +1,619 @@
+
+create database sample_demo;
+
+use sample_demo;
+
+show databases;
+
+select database();
+
+use planetarygoods;
+
+select * from customers;
+
+select country from customers;
+
+select FirstName,LastName from customers;
+
+select * from customers where country = 'Mexico';
+
+/*
+The Inventory Department needs a snapshot of our products 
+to begin their review
+
+We need to fetch all records from the Products table*/
+
+select database();
+select * from products;
+/* Our premium product, "Space Adventure Puzzle" has been receiving a 
+lot of 
+attention lately. Fetch its specific details for a review"
+*/
+select * from products where ProductName='Space Adventure Puzzle';
+
+select * from customers;
+
+select city from customers;
+select distinct city from customers;
+
+drop database if exists sample_demo;
+
+-- create a table
+create database sample_demo;
+use sample_demo;
+
+create table if not exists Stud_info(
+	roll_no int Not null,
+    reg_no int not null auto_increment ,
+    first_name varchar(30) not null default '',
+    last_name varchar(30) not null default '',
+    class varchar(10) not null default '',
+    marks int not null default '0',
+    gender varchar(6) not null default 'male',
+    stud_course_id varchar(30),
+    primary key(reg_no),
+    foreign key (stud_course_id) references courses(course_id));
+    
+describe stud_details;
+
+drop table stud_details;
+
+show tables;
+
+-- rename the table.
+
+Alter table stud_details Rename to Student_Info;
+
+-- add column
+
+Alter table Student_Info Add city varchar(50);
+
+alter table student_info drop reg_no;
+alter table student_info add reg_no varchar(30);
+alter table student_info add primary key(roll_no);
+
+create table course(
+course_id varchar(30) primary key);
+
+alter table student_info add course_id_fk varchar(30);
+
+alter table student_info add foreign key(course_id_fk)
+ references course(course_id);
+
+-- insert the records into the table
+
+insert into student_info values(1,'Kavya','C','Training'
+,99,'F','Hyderabad','11','1AA');
+
+insert into course values('1AC'),('2AA'),('1AZ');
+
+select * from student_info;
+
+alter table course add date_admi date;
+
+insert into course values('11A','2024-08-19');
+
+select * from course;
+
+-- update the records
+
+/* update table_name
+set 
+	col1= exp1,
+    col2=exp2
+    ...
+    [where condn];
+    */
+    
+use sample_demo;
+
+set sql_safe_updates=0;
+
+update course 
+set 
+date_admi='2024-08-20'
+where date_admi is null;
+    
+-- rename a table
+rename table course to COURSES;
+
+-- truncate tabe
+
+select * from student_info;
+
+truncate table student_info;
+
+select 1+1;
+select NOW();
+
+-- comparison operators
+-- < , >, <=, >=, =, != or <>
+CREATE TABLE `products` (
+  `productID`    int unsigned  NOT NULL AUTO_INCREMENT,
+  `productCode`  char(3)           NOT NULL DEFAULT '',
+  `name`         varchar(30)       NOT NULL DEFAULT '',
+  `quantity`     int unsigned  NOT NULL DEFAULT '0',
+  `price`        decimal(7,2)      NOT NULL DEFAULT '99999.99',
+  PRIMARY KEY (`productID`)
+)
+;
+
+INSERT INTO products VALUES (1001, 'PEN', 'Pen Red', 5000, 1.23);
+INSERT INTO products VALUES
+         (NULL, 'PEN', 'Pen Blue',  8000, 1.25),
+         (NULL, 'PEN', 'Pen Black', 2000, 1.25);
+INSERT INTO products (productCode, name, quantity, price) VALUES
+         ('PEC', 'Pencil 2B', 10000, 0.48),
+         ('PEC', 'Pencil 2H', 8000, 0.49);
+INSERT INTO products (productCode, name) VALUES ('PEC', 'Pencil HB');
+
+select * from products;
+
+select name, price from products where price < 1.0;
+
+select name, price from products where productCode ='PEN';
+select name, price from products where productCode <>'PEN';
+
+-- string pattern matching operators `Like` and 'Not Like`
+-- wildcard characters '_' -> matches any single character '%' matches any number of characters
+
+select name from products where name like 'pencil%';
+
+-- Arithmetic operators +, -, *, /, %
+-- Logical operators - AND, OR, NOT
+
+select * from products where productCode='PEN' and quantity >3000;
+
+select * from products where name='Pen Red' or name='Pen Black';
+
+select * from products where name in('Pen Red','Pen Black');
+
+-- select the products whose price is in the range 1.0 and 2.0
+
+select * from products where price between 1.0 and 2.0;
+
+select * from products where price not between 1.0 and 2.0;
+
+-- is null and is not null
+
+select * from products where productCode Is Null;
+select * from products;
+
+select distinct productCode from products;
+
+-- Order by
+-- select expressions from tables [ where conds] order by expression [Asc|Desc];
+
+select * from products order by price desc limit 4;
+
+-- multiple column order by
+
+select * from products order by price desc, quantity asc;
+
+-- 99999 , 1.25(2) , 1.23(1), 0.49(1),0.48
+
+-- Group by clause
+/*
+select exp1,exp2
+	aggregate_function(exp)
+from table
+	[ where condns]
+		groupby exp1, exp2
+        
+*/
+select sum(quantity) from products;
+select * from products;
+
+select productCode,min(price) as 'Minimum price'  from products group by productCode;
+
+select productCode,sum(quantity) as 'Total Count' from products group by productCode;
+
+select productCode, sum(quantity) as 'Total Count' from products group by productCode 
+having sum(quantity) >16000;
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    phone_number VARCHAR(20),
+    hire_date DATE,
+    job_id VARCHAR(50),
+    salary DECIMAL(10,2),
+    department_id INT,
+    foreign key(department_id) references departments(department_id) on delete cascade on update cascade
+);
+
+INSERT INTO employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, department_id) 
+VALUES
+    (1, 'Shikha', 'Chamoli', 'Shikha@example.com', '123-456-7890', '2022-01-01', 'Data_Engineer', 200000.00, 1),
+    (2, 'Bat', 'Man', 'Bat.man@example.com', '987-654-3210', '2022-02-15', 'FIN_ANALYST', 215000.00, 2),
+    (3, 'Neo', 'Anderson', 'Neo.@matrix.com', '555-555-5555', '2021-03-20', 'IT_ADMIN', 120000.00, 3),
+    (4, 'Gan', 'Dalf', 'Gandalf.@lotr.com', '111-222-3333', '2023-04-10', 'MARKETING_COORD', 100000.00, 4),        
+    (5, 'Iron', 'Man', 'Ironman@example.com', '123-456-7990', '2022-01-01', 'Data_Engineer', 150000.00, 1);
+
+CREATE TABLE departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(100)
+);
+
+INSERT INTO departments (department_id, department_name) 
+VALUES 
+    (1, 'Engineering'),
+    (2, 'Finance'),
+    (3, 'IT'),
+    (4, 'Marketing');
+
+/* Query 1:
+ Retrieve the employee details (id, name, job_id, salary) with the highest salary, 
+ and concatenate first name and last name values. 
+ */
+select employee_id, concat(first_name,' ',last_name),job_id,salary
+from employees
+where salary =( select max(salary) from employees);
+/*
+Query 2: Find the employee details (id, name, job_id, hire_date) with the earliest
+ hire date, and concatenate first name and last name values.
+ */
+ 
+select employee_id, concat(first_name,' ',last_name) as full_name,
+job_id, hire_date from employees
+where hire_date=(select min(hire_date) from employees);
+
+/* Query 3: Find the employee details (id, name, job_id, salary) 
+with salaries higher than the average salary of the ‘Engineering’ department.*/
+
+select employee_id,concat(first_name,' ',last_name) as full_name, job_id,salary
+from employees
+where salary >(select avg(salary) from employees where department_id=
+					(select department_id from departments where department_name ='Engineering'));
+
+select * from departments;
+select * from employees;
+
+alter table employees add foreign key (department_id) references departments(department_id);
+
+delete from departments where department_id=3;
+drop table employees;
+
+create user 'demouser' identified by 'pass';
+
+select * from mysql.user;
+Grant select,insert on sample_demo.* to 'demouser'@'localhost';
+GRANT ALL PRIVILEGES ON *.* TO 'demouser';
+
+Revoke grant option ON *.* from 'demouser';
+flush privileges;
+
+drop user if exists 'demouser';
+
+create database join_demo;
+use join_demo;
+
+CREATE TABLE customers (    
+customer_id INT AUTO_INCREMENT PRIMARY KEY,    
+customer_name VARCHAR(255) NOT NULL,    
+email VARCHAR(255),    
+phone VARCHAR(15));
+
+create table orders(
+order_id INT AUTO_INCREMENT PRIMARY KEY,
+customer_id INT,
+order_date Date,
+amount Decimal(10,2),
+FOREIGN KEY(customer_id) references customers(customer_id));
+
+INSERT INTO customers (customer_name, email, phone) VALUES 
+('Jassim','jassim@ex.com','555-1234'),
+('Abid','Abid@ffg.com','112-9876'),
+('Vinay','Vinay@wer.com','998-0765'),
+('Roja','Roja@ret.com','675-3344');
+
+INSERT INTO orders (customer_id, order_date, amount) 
+VALUES (1, '2024-08-01', 100.50), (2, '2024-08-02', 150.75), (1, '2024-08-03', 200.00);
+
+
+/* Use case 1:
+
+Retrieve the data when you need only the matching rows from both tables */
+
+select customers.customer_id,customers.customer_name,orders.order_date,orders.amount from customers
+INNER JOIN
+orders
+ON customers.customer_id= orders.customer_id;
+
+/* Left Join:
+
+ returns all rows from the left table and the matched records from the right table, 
+ or Null if no matching records are found. In addition to the Left Outer 
+ Join clause, this join can also be called the Left Inward Join clause.
+ */
+ 
+ /* Use case of left join:
+ 
+ Retrieve all customers and their orders, including those without any orders.*/
+ 
+ SELECT customers.customer_id,customers.customer_name,orders.order_date,orders.amount
+ from customers
+ left join
+ orders
+ on customers.customer_id=orders.customer_id;
+ 
+ SELECT customers.customer_id,customers.customer_name,orders.order_date,orders.amount
+ from orders
+ left join
+ customers
+ on customers.customer_id=orders.customer_id;
+
+ 
+ SELECT customers.customer_id,customers.customer_name,orders.order_date,orders.amount
+ from orders
+ right join
+ customers
+ on customers.customer_id=orders.customer_id;
+ 
+SELECT customers.customer_id,customers.customer_name,orders.order_date,orders.amount
+ from customers
+left join
+ orders
+ on customers.customer_id=orders.customer_id
+ union
+ SELECT customers.customer_id,customers.customer_name,orders.order_date,orders.amount
+ from customers
+ right join
+ orders
+ on customers.customer_id=orders.customer_id;
+ 
+ /* Cross Join
+ 
+ Generate a cartesioan product of both tables*/
+ 
+ Select customers.customer_id,orders.order_date
+ from customers
+ cross Join
+ orders;
+ 
+ select A.customer_name , B.customer_name from customers A, customers B
+ where A.customer_id < B.customer_id;
+ 
+ select customers.customer_id,orders.order_id
+ from customers
+ inner join orders
+ on customers.customer_id > orders.order_id;
+ 
+ /* Index::
+ 
+ Indexing in MySQL is a technique used to improve the performance of database queries. 
+ An index is a data structure that allows the database to 
+ find and retrieve specific rows much faster than it could by scanning the entire 
+ table.
+ 
+ use sample_demo;
+ 
+select * from departments;
+
+select * from employees;
+
+select * from employees where department_id =1;
+create index idx_dept on employees (department_id);
+/* Types of index:  Clustered and Non Clustered Index
+
+1. Unique Index
+	-- create unique index index_name on tablename(indexcol);
+
+2. Primary Key
+3. Normal or Regular index */
+
+/* views
+	-> It is like a virtual table that is created by a asaved query. It doesn't
+    store any data, but we can use it in our sql queries like our normal table.alter
+    
+    Why ? 1. Simplification , Abstraction, Security, Reusability.alter
+    
+    How?
+    */
+    
+	create view employee_info as
+    select employee_id, concat(first_name,' ',last_name) as full_name, job_id
+    from employees;
+    
+	select * from employee_info;
+    
+/* Trigger
+
+	A Trigger is a stored program invoked automatically in response to 
+    an event such as insert, uptate or delete that occurs in the associated table.
+    
+    */
+    
+    create table notifications(
+    NotificationId INT AUTO_INCREMENT,
+    Notification_Msg VARCHAR(255),
+    DateTime TIMESTAMP NOT NULL,
+    Primary Key(NotificationId));
+    
+/* Syntax to create  a trigger
+
+create trigger trigger_name
+{Before | After} { Insert| Update| delete}
+on table_name
+for Each row
+begin
+	-- trigger body
+end;
+*/
+create table product( ProductID int auto_increment primary key,
+ProductName varchar(50),BuyPrice Decimal(10,2),SellPrice Decimal(10,2),NumberOfItems int);
+
+DELIMITER //
+
+CREATE TRIGGER ProductSellPriceInsertCheck 
+    AFTER INSERT  
+    ON Product FOR EACH ROW  
+ BEGIN
+ IF NEW.SellPrice <= NEW.BuyPrice THEN
+  INSERT INTO Notifications(Notification,DateTime) 
+  VALUES(CONCAT('A SellPrice same or less than the BuyPrice was inserted for ProductID ', NEW.ProductID), NOW()); 
+    END IF;
+ END //
+
+DELIMITER ;
+drop trigger productSellPriceInsertCheck;
+
+
+insert into product values(1,'Apple Mobile',1400,1200,10);
+insert into product values(4,'Vivo',1000,800,20);
+
+select * from product;
+
+select * from notifications;
+
+show triggers;
+
+DELIMITER //
+CREATE TRIGGER ProductSellPriceInsertCheck 
+    AFTER INSERT  
+    ON Product FOR EACH ROW  
+BEGIN
+    IF NEW.SellPrice <= NEW.BuyPrice THEN
+        INSERT INTO Notifications(Notification,DateTime) 
+        VALUES(CONCAT('A SellPrice same or less than the BuyPrice was inserted for ProductID ', NEW.ProductID), NOW()); 
+    END IF;
+END //
+DELIMITER ;
+    
+Grant create trigger on sample_demo.product to 'root@localhost';
+SELECT CURRENT_USER();
+
+    
+
+
+
+
+
+
+
+
+
+
+-- drop table
+-- drop table table_name;
+
+drop table student_info;
+
+INSERT INTO employees (employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, department_id) 
+VALUES
+    (6, 'Sai', 'Kiran', 'Sai@example.com', '113-456-7890', '2024-01-01', 'Data_Engineer', 200000.00, 1);
+    
+select database();
+use sample_demo;
+
+ select * from product;
+ -- create a stored procedure
+ Delimiter $$
+ create procedure getProdName(in P_id INT, Out P_Name varchar(255))
+ Begin
+	select ProductName into P_Name from product where ProductId=P_id;
+END $$
+Delimiter ;
+
+    
+set @prod_id=3;
+call getProdName(@prod_id,@prod_name);
+select @prod_name;
+
+Delimiter @@@
+create procedure InsertProd(
+	IN p_name varchar(100),
+    IN B_price decimal(10,2),
+    IN S_price decimal(10,2),
+    IN N_Items int,
+    out p_id INT)
+begin
+	insert into product(ProductName,BuyPrice,SellPrice,NumberOfItems)
+		values(p_name,B_price,S_price,N_Items);
+	set p_id=Last_insert_id();
+ end @@@
+ delimiter ;
+ 
+ 
+ set @prod_name="Television",@prod_b_price=10000.00,@prod_s_price=12000.00,@noi=10;
+ 
+ call InsertProd(@prod_name,@prod_b_price,@prod_s_price,@noi,@new_prod_id);
+ 
+ select @new_prod_id;
+    
+-- Functions
+use planetarygoods;
+
+select * from orders;
+
+delimiter //
+create function GetTotalSales(customer_id int)
+returns int
+deterministic
+begin
+	declare total int;
+    select sum(TotalPaid) into total from orders where CustomerID=customer_id;
+    return total;
+end //
+delimiter ;
+
+  -- TCL
+  -- commit
+  
+ select * from customers;
+ 
+delete from customers where CustomerID=24;
+commit;
+
+-- rollback -> used to undo or overwrite all the changes made prebiously to the database.
+-- This will remove all the changes made since the last commit or rollback command.
+
+
+    begin;
+    delete from customers where CustomerID=23 and CustomerID=22;
+    Rollback;
+-- Savepoint
+	-- create a point in the transaction where all the changes before it are saved.
+	-- we can create a savepoint for only the changes after the last save point.and
+    -- If we want to roll back changes to a particular point in the transaction history.
+
+BEGIN;
+delete from customers where CustomerID=23;
+savepoint s1;
+delete from customers where CustomerID=22;
+savepoint s2;
+rollback to s1;
+
+
+set @@autocommit:=0;
+
+
+
+
+    use planetarygoods;
+    
+    select * from customers;
+    
+    show databases;
+  
+Delimiter //
+CREATE PROCEDURE DeleteCustomer(IN p_CustomerID INT)
+BEGIN
+    DELETE FROM customers WHERE CustomerID = p_CustomerID;
+END //
+
+DELIMITER ;
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
