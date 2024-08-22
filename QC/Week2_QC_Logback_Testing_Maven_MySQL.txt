@@ -1,0 +1,186 @@
+
+JDBC
+
+ResultSet?
+DAO
+Difference b/w simple and prepared statements?
+try with resources?
+Statement?PreparedStatement?CallableStatement?
+
+Testing
+
+JUnit?
+TDD?
+Unit testing?
+Annotation used in JUnit?
+What is Mockito?
+What are stubs ?
+
+
+MySQL:
+
+Delete vs Drop vs Truncate
+TCL, DCL, DDL, DQL, DML commands
+Cascade?
+Different keys in SQL?
+Primary key vs foreign key?
+
+Normalization?
+Joins and types?
+Views?
+Index?
+Triggers?
+Stored procedure?
+
+Referential Integrity?
+What are the data constraints that can be applied when creating a table in SQL?
+Why and where do you use Scalar and Aggregate functions in SQL? 
+GroupBy, Having, Orderby?
+Different clauses in SQL?
+update vs alter?
+
+
+Maven:
+
+
+Q.1. What do you understand by Maven?
+Ans. The Apache Group created the well-known open-source Maven tool to build, publish, and deploy several projects. Projects developed in C#, Scala, Ruby, etc. are built using this Java-based framework.
+
+
+Q.2. What is Maven useful for?
+Ans.Maven offers the following assistance:
+All the project management operations, including building, documenting, releasing, and distribution, are managed with the aid of Apache Maven.
+The project building process is made simpler by the tool. It enhances the project’s and the build process’ performance.
+Automatic downloads of JAR files and other dependencies are carried out.
+Maven makes it simple to get all the necessary data.
+Maven is simple for developers to create projects in many contexts without having to worry about dependencies, workflows, etc.
+Writing the dependent code in the pom file is all that is necessary to add new dependencies in Maven.
+
+
+Q.3.What are the various components that Maven handles?
+Ans.It handles the following during the process:
+
+Builds
+Dependencies
+Reports
+Distribution
+Releases
+Mailing list
+
+Q.4.What is POM?
+Ans.Project Object Model (POM) refers to an XML file that contains all the information about the project and details of configuration .
+It contains a project description and information about project versioning and configuration management. The XML file is located in the project’s home directory. While running a task, Maven looks for the POM in the current repository.
+
+Q.5.What does the POM contain?
+Ans. The POM contains the following configuration:
+
+Dependencies
+Developers and Contributors
+Plugin
+Plugin settings
+Resources
+
+Q.6.What are the minimum requirements for a POM?
+Ans.The minimum required elements for the POM are:
+
+project root directory
+modelVersion — must be 4.0.0
+groupId — the project’s group id
+artefactId — Artifact (project) ID
+version — the version of the artifact
+
+Q.7.What does the term “build tools” mean?
+Ans. Build tools are integral to the build process. You will need it for the following process:
+
+Generate source code.
+Generation of documentation from source code.
+Compile the source code.
+Package the compiled code into a JAR file.
+Install packaged code to a local repository, server, or central repository.
+
+
+Q.8.What are the steps to install Maven on Windows?
+Ans. Follow these steps to install Maven on Windows.
+
+First download Maven and unzip it. Add JAVA_HOME and MAVEN_HOME to your environment variables. Then add the environment path to Maven variables. Finally, check your Maven installation by checking your Maven version. The mvn -version command shows the version installed on your system.
+
+
+Q.9 What is the command to install a JAR file into a local repository?
+Ans.mvn install is used to install JAR files in your local repository.
+To manually install the JAR into your local Maven Directory, use the plugin mvn install:install-file-Dfile= to file>.
+
+Q.10.What is the command to know the version of Maven ?
+mvn –version is the command used to check the version of Maven.
+
+Q.11.What is Maven clean, default, site?
+Ans.There are three built-in build lifecycles:
+
+Clean: The Clean lifecycle handles project cleaning.
+Default: The default lifecycle handles project deployment.
+Site: The site lifecycle refers to the creation of site documents for a project.
+
+Q.12.What is a Maven repository?
+Ans.A Maven repository refers to a directory of packed JAR files containing metadata. Metadata references the POM files associated with each project. This metadata allows Maven to download dependencies. There are three types of repositories:
+
+local repository
+remote repository
+central repository
+
+Q.13. What types of Maven repositories are there?
+Ans.There are three types of Maven repositories.
+
+1. Local repository:
+A local repository refers to a developer’s computer where all project material is stored. Your local repository contains all the dependency JARs.
+2. Remote repository:
+A remote repository refers to a repository that resides on a server and is used when Maven needs to download dependencies. When something is required from the remote repository, it is first downloaded in the local repository and then used.
+3. Central repository:
+A central repository is a Maven community that takes action when a dependency is required and not found in the local repository. Maven will download dependencies from here to your local repository as needed.
+
+Q.14. What is the command to build a Maven site?
+Ans.- mvn site command is used to build a Maven site.
+
+
+Q.15.What are the stages of the clean life cycle?
+Ans.The clean lifecycle has the following stages:
+
+Pre-clean
+clean
+Post- Clean
+
+
+Q.16.What are the stages of the Site life cycle?
+Ans.The Site lifecycle has the following stages:
+Pre-site
+Site
+Post-site
+Site-deploy
+
+Q.17. What do Maven Plugins entail?
+Ans.The use of Maven plugins, which are fundamental Maven capabilities, allows the reuse of shared build logic across numerous projects.
+The plugins are required to perform operations like code compilation, testing, JAR file creation, and project documentation.
+
+
+
+Q.18.Why do people use Maven Plugins?
+Ans.Using Maven plugins, you can:
+
+Build a JAR file.
+Construct a WAR file.
+compile source code.
+Code unit testing.
+Publish the project’s documentation.
+Report on projects.
+
+Q.19.What categories do Maven Plugins fall under?
+Ans.Maven plugins go within one of two categories:
+
+Build plugins are configured in the pom.xml file’s build/> element and are performed during the build process.
+Reporting plugins are configured in the pom.xml’s reporting/> element and run as part of the stage creation process.
+
+Q.20.What is the inheritance hierarchy for Maven?
+Ans.Maven’s inheritance hierarchy is as follows:
+
+Settings
+CLI parameters
+Parent POM
+Project POM
