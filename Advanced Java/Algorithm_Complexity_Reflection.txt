@@ -1,0 +1,432 @@
+Quick sort:
+	partitioning is important
+	
+	we will select an element as the pivot element usuually left most or rightmost ele.
+		
+			27	23	11	7	9	17	6
+	
+	two pointers i and j
+
+	pivot - 7
+
+			27 < pivot (No) (no increment of i)
+			7 < 6 (no decrement of j)
+
+			6	23	11	7	9	17	27
+
+	23 < pivot (no inceremnet of i)
+	7 <17 (j --)
+	
+	23 < pivot ( no increment of i)
+	7 < 9 ( j--)
+	
+	23 < pivot (no increment of i)
+	7 < 7 ( no decrement of j)	-> leads to swapping of 7 and 23
+
+
+			6 	7	11	23	9	17	27
+
+
+
+		i<j	 condn fails no swappig
+
+
+			11 	23	9	17	27
+
+	pivot is 9
+		11 < 9 
+			9 	23	11	17	27
+
+function quicksort(arr, i ,j)
+	pivot_index= partition(arr,i,j);
+	// if "i" is less than pivot_index-1, then the ele at left are to be sorted
+	if(i <pivot_index-1)
+		quicksort(arr,i,pivot_index-1);
+	end if
+
+	// if pivot_index is less than j
+	// then the ele a right are to be sorted 
+	if(pivot_index < j)
+		quicksort(arr,pivot_index,j);
+	end if
+end
+
+
+
+
+
+function partition(arr, i, j)
+	i -> pointer on the leftmost ele
+	j -> pointre on the rightmost
+
+	pivot = array[(i+j)/2];	
+	
+	while(i<j)
+		// the pointer i moves ahead till arr[i]<pivot,
+		// it stops at when arr[i]>=pivot
+		while(arr[i]<pivot)
+			i=i+1
+		end while
+		
+		// the pointer j movesback till arr[j]>pivot
+		
+		while(pivot < arr[j])
+			j=j-1
+		end while
+
+		if( i <=j)
+			swap(arr[i],arr[j[)
+			i= i+1
+			j=j-1
+		end if
+	end while
+	return i // return the index of partirtion
+end
+
+
+time complexity:	
+	
+	is a measure to determine how long an algorithm takes to run based on the input size.
+	It is expressed in different notations
+	three main scenarios to consider
+		1. Best case complexity --> it represents the lower bound
+		2. Average case complexity -> this is the expcetded time an algorithm takes when any 
+					inputs are given randomly. It represents the typical performance
+		3. Worst case complexity -> the slowest time an algorithm can perform any input.
+					it represents teh upper bound of an algorithm.
+
+
+To describe these time complexities we have three notations commonly used:
+		1. Big O
+			-> represents the upper bound or worst case time complexity.
+			It tells us the maximum amount of time an algorithm will take to run.
+			O(n)..
+		2. Theta (Θ) Notation:
+			-> It represents both upper and lower bounds or tight bound.
+			It will give precise description of how an algorithm's performance scales with
+			input size consodering both best and worst case
+		3. Omega (Ω) Notation:
+			-> It represnts lower bound or best case time complexity.
+			-> It tells the minimum amount of time 
+		
+Big O
+
+	O(n) -> as the input size n artibrarily large, then the algorithm's running time
+	will not grow fastre than the specified n
+
+	you can ignore the constant operations
+	o(3).. 0(3n)  these rae constants
+
+
+		for (i = 0; i < n; i++) {
+    			sum = sum + i
+			}
+
+		x = 10
+
+		for (i = 0; i < n; i++) {
+    		sum = sum + 1
+			}	
+			the complexity for above code is O(n)
+
+	---------------------------------------------------------------
+
+
+	for (i = 0; i < n; i++) {
+   		 x = 10
+
+    		for (i = 0; i < n; i++) {
+        		sum = sum + 1
+    		}
+	}
+		the complexity is O(n^2)
+	----------------------------------------------------------------
+| Complexity               | Big O               |
+| ------------------------ | ------------------- |
+| constant time            | O(1)                |
+| logarithmic time         | O(log(n))           |
+| linear time              | O(n)                |
+| linear linearithmic time | O(nlog(n))          |
+| quadric time             | O(n^2)              |
+| cubic time               | O(n^3)              |
+| exponential time         | O(a^n), where a > 1 |
+| factorial time           | O(n!)               |
+	
+	
+		
+Algorithm		Average Case
+-------------------------------------
+
+Linear Search		O(n)
+Binary Search		O(log n)
+Insertion Sort		O(n^2)
+Merge Sort		O(n log n)
+Selection Sort		O(n^2)
+Quick Sort		O(n log n)
+Bubble Sort		O(n^2)	
+
+
+--------------------------------------------------------	
+
+example:
+	
+
+low = 0;
+high = n - 1;
+while (low <= high) {
+    mid = (low + high) / 2;
+    if (array[mid] == target) {
+        return mid;
+    } else if (array[mid] < target) {
+        low = mid + 1;
+    } else {
+        high = mid - 1;
+    }
+}
+
+O(logn)
+
+-----------------------------------------------
+function divideAndConquer(n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return divideAndConquer(n/2) + divideAndConquer(n/2) + n;
+}
+
+O(nlogn)
+----------------------------------------------------------
+function recursive(n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return recursive(n - 1) + recursive(n - 1);
+}
+
+	1+2+4+8+.....
+	2^0 +2^1+2^3+....
+	
+	O(2^n)
+
+----------------------------------------------------------
+
+What is Time Complexity?
+Time complexity is a concept in computer science that describes the amount of time an algorithm takes 
+to run as a function of the length of the input. It's a crucial aspect of algorithm analysis as it 
+helps understand how efficiently an algorithm performs, particularly as the size of the input data 
+increases.
+
+Key Points About Time Complexity
+1. Measure of Efficiency: Time complexity provides a way to quantify the efficiency of an algorithm 
+in terms of time. It's particularly important for understanding the scalability of an algorithm.
+
+2. Big O Notation: Time complexity is often expressed using Big O notation, which provides an upper 
+bound on the time requirements of an algorithm in the worst-case scenario. For example, O(n) denotes 
+linear time complexity, meaning the time required grows linearly with the size of the input.
+
+3. Types of Time Complexity:
+
+Constant Time (O(1)): The execution time remains constant regardless of the input size.
+
+Logarithmic Time (O(log n)): The execution time increases logarithmically with an increase in input size. Binary search is a classic example.
+
+Linear Time (O(n)): The execution time increases linearly with the input size. For instance, finding an 
+item in an unsorted list.
+
+Quadratic Time (O(n²)): The time increases quadratically with the input size. This is common in 
+algorithms with nested loops over the input data.
+
+Exponential Time (O(2n)): The execution time doubles with each addition to the input data set. 
+This is typical of algorithms that solve problems by computing all possible combinations.
+
+4. Worst, Average, and Best Case: 
+	Time complexity can refer to the worst-case (usually represented), average-case, or best-case scenario for an algorithm's running time. The worst-case time complexity is the most commonly used because it guarantees the maximum time taken for any input.
+
+5. Impact on Real-world Applications: In practical scenarios, the time complexity of an algorithm can significantly impact its usability. For large input sizes, an algorithm with a lower time complexity will generally perform better than one with a higher time complexity.
+
+What is Space Complexity?
+Space complexity is a term in computer science used to describe the amount of memory space required by 
+an algorithm to run as a function of the length of the input. It is an important metric for 
+understanding how efficient an algorithm is in terms of memory usage, especially in environments 
+where memory resources are limited.
+
+Key Points About Space Complexity
+1. Memory Usage Measurement: Space complexity measures the total amount of memory or storage space 
+an algorithm needs to complete. This includes both the space taken up by the input data and any 
+additional space used by the algorithm for variables, data structures, and function calls.
+
+2. Big O Notation: Like time complexity, space complexity is often expressed using Big O notation. 
+This notation provides an upper bound on the space requirements of an algorithm in the worst-case
+ scenario. For example, O(n) indicates that the space required grows linearly with the input size.
+
+3. Types of Space Complexity:
+
+Constant Space (O(1)): The algorithm uses a fixed amount of memory space regardless of the input size. 
+For example, an algorithm that swaps two numbers.
+Linear Space (O(n)): The memory required grows linearly with the input size. An example is creating 
+a list of 'n' elements.
+Quadratic Space (O(n²)): The space requirement grows quadratically with the input size, commonly 
+seen in algorithms that create two-dimensional arrays based on the input size.
+
+
+Greedy programming::
+
+	 A Greedy algorithm makes greedy choices at each step to ensure that the objective function is optimized. The Greedy algorithm has only one shot to compute the optimal solution so that it never goes back and reverses the decision.
+
+Dikkstra's Algorithm to find shorest path:
+
+	A -> B -> D -> F -> E -> C
+
+	3 + 5+ 2+ 1+ 9 = 20   
+
+Dynamming programming:
+	
+	Is used for optimization problems where sub problems overlap. It involves breaking down a problem into simpler sub problems, solving each - problem just once, and storing their soln to avoid redunant work.
+
+
+Knapsack,
+longest common subsequence
+fibonacci sequnce:
+
+	0, 1, 1, 2, 3, 5, 8, 13, ....
+
+int fibonacci(int n)
+{
+    if(n<=1)
+        return n;
+ 
+    return fibonacci(n-1)+fibonacci(n-2);
+}
+
+---------------------------------------
+using dp for fibonacci
+
+int fibo(int n)
+{
+	int F[n+1];
+	F[0]=0;
+	F[1]=1;
+	
+	for(int i=2;i<=n;i++)
+		F[i]=F[i-1]+F[i-2]; // F[2]=F[1]-F[0]
+
+	return F[n];
+}
+
+----------------------------------------------
+
+Reflection api
+
+	--> allows us to inspect and manipulate classes, interfaces,constructors, methods and fields at run time.
+
+	-> "Class" is a class in Java that keep all the information about the objects and classes at
+runtime. These objects will be used to perform reflection.
+
+
+To perform reflection we need to create an object first.
+
+with these objects we can call various methods to get the details about the methods, fields ...
+
+To create an object for the "Class" we can do it in three ways
+
+1.using .forName()
+
+class Person{
+}
+
+// create an object to reflect this Person class
+
+Class o1=Class.forName("Person"); // it will take the name of the class to be reflected as argument.
+
+-----------------------------------------------------------------------------------------
+2. using .getClass()
+
+Person p1=new Person();
+Class o2=p1.getClass(); // p1 is the obj of Person class so with the help of getClass() we are getting the class of the respective object.
+
+
+-------------------------------------------------------------------------------------------
+
+3. Using .class extension
+
+
+Class o3=Person.class;
+
+
+-------------------------------------------------------------------------------------------
+
+class Main
+{
+	public static void main(String[] args)
+	{
+		try
+		{
+			Person p1=new Person();
+
+			// create an obj of Class using getClass()
+			Class o1=p1.getClass();
+
+			// get name of the class
+			String name= o1.getName();
+			System.out.println("Name: ",+name);
+	
+			// get the access modifier
+
+			int mod=o1.getModifers();
+
+			String mod=Modifer.toString(mod);
+			System.out.println("Modifier: "+mod);
+			
+			// get the super class
+
+			Class sup_class=o1.getSuperClass();
+			System.out.println("SuperClass is sup_class.getName());
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+}
+
+public class Person
+{
+	public void display()
+	{
+		System.out.println("Hi Reflection example");
+	}
+}
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
