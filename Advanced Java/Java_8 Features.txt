@@ -1,0 +1,292 @@
+Java 8 Feature.
+
+	1. Lambda expressions
+	2. Functional interfaces
+	3. Default and static methods
+	4. Stream API
+	5. Optional Class
+	6. New DateTime API
+	7. forEach
+	
+
+1. Lambda expression:
+		
+	- > we can represent a block of code that can be executed later.
+	-> anonymous functions, which can be passed as method arguments or can be returned from methods just like other object.
+
+
+Syntax:
+	(parameter) -> {statements};
+
+	" -> " ----- seperates the parameter from the body of the lambda expression.
+
+
+
+i) no arguments
+
+	() -> System.out.println("lambda exp with no arguments");
+
+ii) one or more arguments
+
+	(n1) -> System.out.println(String.format("Value of a is: %s",a);
+	
+	(n1,n2) -> n1+n2;
+
+	(Integer n1, Integer n2) -> n1+n2;
+
+iii) more than one statements
+
+	(Integer n1, Integer n2) -> {
+	System.out.prinltn(String.format("Return max from %s and %s", n1,n2));
+	return (n1>n2) ?a:b;
+	};
+
+
+// 
+
+
+interface MaxFinder{
+	int findMax(int a, int b);
+}
+
+public class LambdaExpExample{
+	public static void main(String[] args)
+	{
+		MaxFinder maxfind=(a,b) -> (a>b)?a:b;
+		System.out.println(maxfind.findMax(5,10));
+		System.out.println(maxfind.findMax(15,5));
+	}
+}
+
+
+
+
+Practice question:
+	
+****Sorting a list of objects using a lambda expression****
+
+
+Let's say you have a list of Person objects, and you want to sort them based on their age using a lambda expression.
+
+import java.util.*;
+
+class Person{
+	String name;
+	int age;
+	Person(String name, int age)
+	{
+		this.name=name;
+		this.age=age;
+	}
+	@Override
+	public String toString()
+	{
+		return name +" ("+age+")";
+	}
+}
+
+public class LambdaExample
+{
+	public static void main(String[] args)
+	{
+		
+		List<Person> people=new ArrayList<>();
+		people.add(new Person("Guna",21));
+		people.add(new Person("Sree",8));
+		people.add(new Person("Prasanna",15));
+		people.add(new Person("Enba",39));
+		
+        // using lambda expression
+		Collections.sort(people, (p1,p2) -> p1.age - p2.age);
+	    // using anonymous class
+	 /*   
+	Collection.sort(people, new Comparator<Person>(){
+	    @Override
+	    public int compare(Person p1,Person p2)
+	    {
+	        return p1.age-p2.age;
+	        
+	    }
+	})*/
+
+		System.out.println("Sorted list::");
+		for(Person p: people)
+		{
+			System.out.println(p);
+		}
+	}
+}
+
+---------------------------------------------------------------------------
+2. Functional interface.
+
+	--> It has exactly one abstract method
+	--> also known as Single Abstract Method Interfaces (SAM)
+
+	Built in interfaces in Java 8
+		--> Predicate
+		--> Function
+		--> Consumer
+		--> Supplier
+
+	@FunctionalInterface is used to represent a functional interface.
+
+	i) Predicate
+		-> It has single abstract method test(T t)
+		-> single argument
+		-> return a boolean value.
+	
+		--> Genreally we use to filter values or to test whether the value satisfies the condition.
+
+		Predicate<Integer> isEligibleToVote=(age) -> age >= 18;
+		boolean eligible = isEligibleToVote.test(25);
+
+	II) Function
+		-> It has single abstract method apply( T t )
+		-> takes single argument
+		-> return a object
+	
+		-> We use this if we want to map values from one type to another or in transforming...
+	
+
+		Function<Integer,Integer> findSq =(num) ->(num*num);
+
+		int sq=findSq.apply(10);
+
+	iii) Consumer
+		--> has single abstract methods accept(T t) 
+		--> single argument
+		--> returns no result.
+
+		--> used  to perform something like printing in console, or logging
+
+
+		Consumer<String> res=(x) -> Systemout.println(x);
+		res.accept("Java 8 features!!!");
+
+	iV) Supplier
+		
+		-> single abstract method get()
+		-> no argument
+		-> return a result
+
+
+		Supplier<Integer> getRandomInteger=() -> (int) (Math.random() * 500);
+		int rand_int =getRandomInteger.get();
+
+-----------------------------------------------------------------------------------
+**** Exercise: Employee Data Processing ****
+
+You are given an Employee class that contains information about employees in a company. Your task is to implement methods that filter, transform, consume, and supply employee data using the functional interfaces: Predicate, Function, Consumer, and Supplier.
+
+1. Predicate: Filter the list of employees based on a condition (e.g., salary above a certain threshold).
+2. Function: Transform the employee data (e.g., extract employee names).
+3. Consumer: Perform an action on each employee (e.g., give a raise).
+4. Supplier: Supply a default Employee object when needed.
+
+
+***Task:***
+
+1. Filter Employees by Salary:
+
+	Use a Predicate<Employee> to filter employees who earn more than a specified amount.
+
+2. Extract Employee Names:
+
+	Use a Function<Employee, String> to create a list of employee names from a list of Employee objects.
+
+3. Give a Raise to Employees:
+
+	Use a Consumer<Employee> to give a 10% raise to each employee.
+
+4. Provide a Default Employee:
+
+	Use a Supplier<Employee> to provide a default Employee object when needed.
+
+***Instructions:***
+
+1. Create a list of employees.
+
+	Implement and use the following methods:
+
+		List<Employee> filterEmployees(List<Employee> employees, Predicate<Employee> predicate)
+		List<String> getEmployeeNames(List<Employee> employees, Function<Employee, String> function)
+		void giveRaise(List<Employee> employees, Consumer<Employee> consumer)
+		Employee getDefaultEmployee(Supplier<Employee> supplier)
+
+	In the main method:
+
+			Filter employees who earn more than $50,000.
+			Extract the names of all employees.
+			Give all employees a 10% raise.
+			Get and print the details of the default employee.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
