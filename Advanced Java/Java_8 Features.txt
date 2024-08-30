@@ -1,234 +1,198 @@
-Java 8 Feature.
+Java Streams:
 
-	1. Lambda expressions
-	2. Functional interfaces
-	3. Default and static methods
-	4. Stream API
-	5. Optional Class
-	6. New DateTime API
-	7. forEach
+--> Sequence of data that we can process in a declarative and functional style.
+--> It allows us to perform opertaions like filtering, mapping and reducing on the collection of data.
+--> It can be used with various data sources, including arrays, collections, I/O channels.
+
+	1. Intermediate operations
+	2. Terminal Operations
+
+List<String> myList= Arrays.asList("Apple","Mango","Banana");
+1. Stream Creations
+
+i) Collections
+Stream <String> seq_st= myList.stream();
+Stream<String> Par_Stream= myList.parallelStream();
+
+ii) Arrays.stream()
+int[] numbers={10,20,30,40,50};
+IntStream stream=Arrays.stream(numbers);
+
+iii)Other Data Sources.
+Stream<String> st= Stream.of("Apple","Banana","Orange");
+
+
+Intermediate Operations:
 	
-
-1. Lambda expression:
-		
-	- > we can represent a block of code that can be executed later.
-	-> anonymous functions, which can be passed as method arguments or can be returned from methods just like other object.
+i) filter() --> It is based on a predicate
 
 
-Syntax:
-	(parameter) -> {statements};
-
-	" -> " ----- seperates the parameter from the body of the lambda expression.
-
-
-
-i) no arguments
-
-	() -> System.out.println("lambda exp with no arguments");
-
-ii) one or more arguments
-
-	(n1) -> System.out.println(String.format("Value of a is: %s",a);
-	
-	(n1,n2) -> n1+n2;
-
-	(Integer n1, Integer n2) -> n1+n2;
-
-iii) more than one statements
-
-	(Integer n1, Integer n2) -> {
-	System.out.prinltn(String.format("Return max from %s and %s", n1,n2));
-	return (n1>n2) ?a:b;
-	};
-
-
-// 
-
-
-interface MaxFinder{
-	int findMax(int a, int b);
-}
-
-public class LambdaExpExample{
-	public static void main(String[] args)
-	{
-		MaxFinder maxfind=(a,b) -> (a>b)?a:b;
-		System.out.println(maxfind.findMax(5,10));
-		System.out.println(maxfind.findMax(15,5));
-	}
-}
-
-
-
-
-Practice question:
-	
-****Sorting a list of objects using a lambda expression****
-
-
-Let's say you have a list of Person objects, and you want to sort them based on their age using a lambda expression.
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-class Person{
-	String name;
-	int age;
-	Person(String name, int age)
-	{
-		this.name=name;
-		this.age=age;
-	}
-	@Override
-	public String toString()
-	{
-		return name +" ("+age+")";
-	}
-}
-
-public class LambdaExample
+public class Main
 {
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		
-		List<Person> people=new ArrayList<>();
-		people.add(new Person("Guna",21));
-		people.add(new Person("Sree",8));
-		people.add(new Person("Prasanna",15));
-		people.add(new Person("Enba",39));
 		
-        // using lambda expression
-		Collections.sort(people, (p1,p2) -> p1.age - p2.age);
-	    // using anonymous class
-	 /*   
-	Collection.sort(people, new Comparator<Person>(){
-	    @Override
-	    public int compare(Person p1,Person p2)
-	    {
-	        return p1.age-p2.age;
-	        
-	    }
-	})*/
-
-		System.out.println("Sorted list::");
-		for(Person p: people)
-		{
-			System.out.println(p);
-		}
+		List<String> names=Arrays.asList("sai","sree","abi","bavya","kani","priya");
+		
+		List<String> filteredNames= names.stream().filter( n -> n.startsWith("s")).collect(Collectors.toList());
+		System.out.println(filteredNames);
 	}
 }
 
----------------------------------------------------------------------------
-2. Functional interface.
 
-	--> It has exactly one abstract method
-	--> also known as Single Abstract Method Interfaces (SAM)
+ii) map(): Transform elements using a function
 
-	Built in interfaces in Java 8
-		--> Predicate
-		--> Function
-		--> Consumer
-		--> Supplier
+import java.util.*;
+import java.util.stream.Collectors;
 
-	@FunctionalInterface is used to represent a functional interface.
-
-	i) Predicate
-		-> It has single abstract method test(T t)
-		-> single argument
-		-> return a boolean value.
-	
-		--> Genreally we use to filter values or to test whether the value satisfies the condition.
-
-		Predicate<Integer> isEligibleToVote=(age) -> age >= 18;
-		boolean eligible = isEligibleToVote.test(25);
-
-	II) Function
-		-> It has single abstract method apply( T t )
-		-> takes single argument
-		-> return a object
-	
-		-> We use this if we want to map values from one type to another or in transforming...
-	
-
-		Function<Integer,Integer> findSq =(num) ->(num*num);
-
-		int sq=findSq.apply(10);
-
-	iii) Consumer
-		--> has single abstract methods accept(T t) 
-		--> single argument
-		--> returns no result.
-
-		--> used  to perform something like printing in console, or logging
-
-
-		Consumer<String> res=(x) -> Systemout.println(x);
-		res.accept("Java 8 features!!!");
-
-	iV) Supplier
+public class Main
+{
+	public static void main(String[] args) {
 		
-		-> single abstract method get()
-		-> no argument
-		-> return a result
+		
+		List<String> names=Arrays.asList("sai","sree","abi","bavya","kani","priya");
+		
+		List<Integer> lengthOfNames= names.stream().map( String::length).collect(Collectors.toList());
+		System.out.println(lengthOfNames);
+	}
+}
 
 
-		Supplier<Integer> getRandomInteger=() -> (int) (Math.random() * 500);
-		int rand_int =getRandomInteger.get();
-
------------------------------------------------------------------------------------
-**** Exercise: Employee Data Processing ****
-
-You are given an Employee class that contains information about employees in a company. Your task is to implement methods that filter, transform, consume, and supply employee data using the functional interfaces: Predicate, Function, Consumer, and Supplier.
-
-1. Predicate: Filter the list of employees based on a condition (e.g., salary above a certain threshold).
-2. Function: Transform the employee data (e.g., extract employee names).
-3. Consumer: Perform an action on each employee (e.g., give a raise).
-4. Supplier: Supply a default Employee object when needed.
+iii) Sorted(): Sort elements
 
 
-***Task:***
+import java.util.*;
+import java.util.stream.Collectors;
 
-1. Filter Employees by Salary:
-
-	Use a Predicate<Employee> to filter employees who earn more than a specified amount.
-
-2. Extract Employee Names:
-
-	Use a Function<Employee, String> to create a list of employee names from a list of Employee objects.
-
-3. Give a Raise to Employees:
-
-	Use a Consumer<Employee> to give a 10% raise to each employee.
-
-4. Provide a Default Employee:
-
-	Use a Supplier<Employee> to provide a default Employee object when needed.
-
-***Instructions:***
-
-1. Create a list of employees.
-
-	Implement and use the following methods:
-
-		List<Employee> filterEmployees(List<Employee> employees, Predicate<Employee> predicate)
-		List<String> getEmployeeNames(List<Employee> employees, Function<Employee, String> function)
-		void giveRaise(List<Employee> employees, Consumer<Employee> consumer)
-		Employee getDefaultEmployee(Supplier<Employee> supplier)
-
-	In the main method:
-
-			Filter employees who earn more than $50,000.
-			Extract the names of all employees.
-			Give all employees a 10% raise.
-			Get and print the details of the default employee.
+public class Main
+{
+	public static void main(String[] args) {
+		
+		
+		List<String> names=Arrays.asList("sai","sree","abi","bavya","kani","priya");
+		
+		List<String> sortedNames= names.stream().sorted().collect(Collectors.toList());
+		System.out.println(sortedNames);
+	}
+}
 
 
+iV) distinct(): Removes duplicate elements
 
---------------------------------------------------------------------------------------------------
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main
+{
+	public static void main(String[] args) {
+		
+		
+		List<String> names=Arrays.asList("sai","sree","abi","bavya","kani","priya","priya","sree","sai");
+		
+		List<String> distinctNames= names.stream().distinct().collect(Collectors.toList());
+		System.out.println(distinctNames);
+	}
+}
+
+
+v) flatMap() -> used to flattedn nested collections into a single stream
+		-> it convert a stream of list into stream of elements
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main
+{
+	public static void main(String[] args) {
+		
+		
+		
+
+List< List<Integer> > nestedList =Arrays.asList(
+					Arrays.asList(1,2),Arrays.asList(3,4),Arrays.asList(5,6));
+
+List<Integer> flat_list=nestedList.stream().flatMap(List::stream).collect(Collectors.toList());
+
+System.out.println(nestedList);
+System.out.println(flat_list);
+
+
+	}
+}
 
 
 
 
+------------------------------------------------------------
 
+Terminal Operations
+
+
+i) collect()
+ii) reduce()
+
+*******************************************************************************/
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main
+{
+	public static void main(String[] args) {
+		
+		
+		
+
+List<Integer> nums=Arrays.asList(1,2,3,4,5);
+
+int sum=nums.stream().reduce(0,Integer::sum);
+System.out.println(sum);
+
+
+	}
+}
+
+
+iii) max() and min()
+
+iv) forEach()
+
+v) ifPresent()
+
+
+
+-------------------------------------------------------------------------------------------
+
+Multithreading!!!!!
+
+
+Multithreading in Java allows multiple threads of execution to run concurrently within a single program. Threads are lightweight processes, and they enable developers to write programs that can perform multiple tasks concurrently, improving overall system efficiency and responsiveness.
+
+
+Thead!!!!!!!!!!!
+
+
+A thread is a lightweight unit of execution within a process. It has its stack of memory and can run independently of other threads in the same process. Threads share the same process resources, such as the heap and the code section. The Java Virtual Machine allows an application to have multiple threads of execution running concurrently.
+
+Every thread has a priority. Threads with higher priority are executed in preference to threads with lower priority. Each thread may or may not also be marked as a daemon...
+
+!!!!!!!!!!Thread States!!!!!!!!!!!!!!!
+
+
+New: A thread has  not started is in this state
+
+Runnable: thread executing in JVM is in this state
+
+Blocked: thread that is blocked waiting for monitor lock
+
+Waiting: thread is waiting indefinitely for another thread to perform a particular action in this state.
+
+Timed_waiting: wait for specified waiting time 
+
+Terminated: thread that has exited is in this state
 
 
 
