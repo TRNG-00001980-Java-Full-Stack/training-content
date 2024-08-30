@@ -1,0 +1,29 @@
+CREATE DATABASE OnlineBanking;
+
+USE OnlineBanking;
+
+CREATE TABLE admin (
+    admin_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE customer (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    balance DECIMAL(10, 2) DEFAULT 0.00
+);
+
+CREATE TABLE transaction (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    type ENUM('deposit', 'withdraw', 'transfer'),
+    amount DECIMAL(10, 2),
+    transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+);
+
+select  from customer;
+
