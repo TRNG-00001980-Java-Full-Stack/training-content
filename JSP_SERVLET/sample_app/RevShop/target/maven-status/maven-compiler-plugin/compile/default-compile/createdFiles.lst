@@ -1,0 +1,6 @@
+models\User.class
+servlets\DemoServlet.class
+servlets\UserServlet.class
+dao\UserDao.class
+configs\DBConnection.class
+servlets\RegistrationServlet.class
