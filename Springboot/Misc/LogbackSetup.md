@@ -1,4 +1,4 @@
-### Logback in Spring Boot: A Detailed Tutorial
+### Logback in Spring Boot
 
 Logback is a popular logging framework for Java applications, serving as the successor to Log4j and SLF4J (Simple Logging Facade for Java). It is widely used in Spring Boot applications due to its performance, flexibility, and ease of configuration. Spring Boot uses Logback as the default logging framework, making it easy to set up and customize logging behavior.
 
@@ -197,5 +197,3 @@ You can define custom loggers for specific packages or classes.
 ### Conclusion
 
 Logback provides a powerful and flexible logging solution for Spring Boot applications. By customizing Logback through XML configuration files, you can control how logs are formatted, where they are stored, and which levels of messages are captured. This tutorial covered basic and advanced Logback configurations, showing how to leverage its features to create a robust logging setup.
-
-If you have specific requirements or need help configuring a particular aspect of Logback, let me know how I can further assist you!
